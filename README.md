@@ -1,2 +1,2 @@
-# mk_words_game
-SEDC final project
+# Погоди го зборот - игра
+## SEDC final project
