@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameGottenLettersComponent implements OnInit {
 
+  // tslint:disable-next-line:max-line-length
+  fullListOfLetters = ['А', 'Б', 'В', 'Г', 'Д', 'Ѓ', 'Е', 'Ж', 'З', 'Ѕ', 'И', 'Ј', 'К', 'Л',	'Љ', 'М', 'Н', 'Њ',	'О',	'П',	'Р',	'С',	'Т',	'Ќ',	'У',	'Ф',	'Х',	'Ц',	'Ч',	'Џ',	'Ш'];
+  maxNumberOfLetters = 9;
+  choosenListOfLetters = [];
+
   constructor() { }
 
   ngOnInit() {
+    this.chooseLetters(this.fullListOfLetters);
+  }
+
+  randomNumber() {
+    return Math.round(Math.random() * 31);
+  }
+
+  chooseLetters(list: String[]) {
+    for (let i = 1; i <= this.maxNumberOfLetters; i++) {
+      this.choosenListOfLetters.push(list[this.randomNumber()]);
+    }
   }
 
 }
