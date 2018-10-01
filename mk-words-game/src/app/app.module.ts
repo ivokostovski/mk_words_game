@@ -9,6 +9,9 @@ import { FooterComponent } from './footer/footer.component';
 import { HighscoresComponent } from './highscores/highscores.component';
 import { GameInputComponent } from './game/game-input/game-input.component';
 import { GameGottenLettersComponent } from './game/game-gotten-letters/game-gotten-letters.component';
+import { HttpClientModule } from '@angular/common/http';
+import { DictionaryService } from './services/dictionary.service';
+import { UnicodeConverterService } from './services/unicodeConverter.service';
 
 @NgModule({
   declarations: [
@@ -23,9 +26,10 @@ import { GameGottenLettersComponent } from './game/game-gotten-letters/game-gott
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DictionaryService, UnicodeConverterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

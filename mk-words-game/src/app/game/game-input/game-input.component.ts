@@ -22,7 +22,7 @@ export class GameInputComponent {
    }
 
    addWord(content) {
-    this.submitedWord = new Word(content.content, this.isValid);
+    this.submitedWord = new Word((content.content).trim().toLowerCase(), this.isValid);
     this.notify.emit(this.submitedWord);
     this.rForm.reset();
    }
