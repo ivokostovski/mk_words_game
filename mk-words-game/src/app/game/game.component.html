@@ -1,2 +1,11 @@
-<app-game-input></app-game-input>
+<app-game-input (notify)="oNsumbitWordClicked($event)"></app-game-input>
 <app-game-gotten-letters></app-game-gotten-letters>
+<div class="row" *ngIf="latestWord">
+  <div class="col-12">
+    <ul *ngFor="let word of submitedWords" class="list-group">
+      <li class="list-group-item my-1" [ngClass]="wordClasses">{{word.content}}</li>
+    </ul>
+  </div>
+</div>
+
+<!-- (triedWordsToParent)="eventHandler($event)" -->

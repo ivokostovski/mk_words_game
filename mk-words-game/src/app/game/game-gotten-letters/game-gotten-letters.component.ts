@@ -9,7 +9,7 @@ export class GameGottenLettersComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
   fullListOfLetters = ['А', 'Б', 'В', 'Г', 'Д', 'Ѓ', 'Е', 'Ж', 'З', 'Ѕ', 'И', 'Ј', 'К', 'Л',	'Љ', 'М', 'Н', 'Њ',	'О',	'П',	'Р',	'С',	'Т',	'Ќ',	'У',	'Ф',	'Х',	'Ц',	'Ч',	'Џ',	'Ш'];
-  maxNumberOfLetters = 9;
+  maxNumberOfLetters = 14;
   choosenListOfLetters = [];
 
   constructor() { }
