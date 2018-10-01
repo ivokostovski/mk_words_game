@@ -16,7 +16,6 @@ export class UnicodeConverterService {
     }
     newWord = newWordArray.join();
     newWord = newWord.replace(/,/g, '');
-    console.log(newWord);
     return newWord;
   }
 

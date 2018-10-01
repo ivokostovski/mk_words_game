@@ -13,7 +13,7 @@ export class GameInputComponent {
   @Output() notify: EventEmitter<any> = new EventEmitter<any>();
   submitedWord: Word;
   rForm: FormGroup;
-  isValid = true;
+  isValid: boolean;
 
   constructor(private fb: FormBuilder) {
     this.rForm = fb.group({

@@ -31,7 +31,7 @@ export class GameComponent implements OnInit {
   }
 
   oNsumbitWordClicked(newWord: Word) {
-    this.checkIfWordIsValid(newWord);
+    newWord.isValid = this.checkIfWordIsValid(newWord);
 
     if (newWord.isValid === true) {
       this.wordClasses['bg-success'] = true;
@@ -46,16 +46,14 @@ export class GameComponent implements OnInit {
   }
 
   checkIfWordIsValid(word: Word) {
+    let valid = false;
     this.convertedWord = this.converter.convertWord(word.content);
     for (let i = 0; i < this.myDictionary.length; i++) {
       if (this.convertedWord === this.myDictionary[i].lexeme) {
-        console.log(this.convertedWord + this.myDictionary[i].lexeme + word.content);
-        word.isValid = true;
-        console.log('TRUE');
-      } else {
-        word.isValid = false;
+        valid = true;
       }
     }
+    return valid;
   }
 
 }
