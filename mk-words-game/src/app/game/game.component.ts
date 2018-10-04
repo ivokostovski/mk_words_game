@@ -16,10 +16,6 @@ export class GameComponent implements OnInit {
   convertedWord;
   submitedWords: Word[] = [];
   latestWord: Word;
-  wordClasses = {
-    'bg-danger': true,
-    'bg-success': true
-  };
 
   constructor(private dicService: DictionaryService, private converter: UnicodeConverterService) {
   }
@@ -32,15 +28,6 @@ export class GameComponent implements OnInit {
 
   oNsumbitWordClicked(newWord: Word) {
     newWord.isValid = this.checkIfWordIsValid(newWord);
-
-    if (newWord.isValid === true) {
-      this.wordClasses['bg-success'] = true;
-      this.wordClasses['bg-danger'] = false;
-    } else {
-      this.wordClasses['bg-success'] = false;
-      this.wordClasses['bg-danger'] = true;
-    }
-
     this.latestWord = newWord;
     this.submitedWords.push(newWord);
   }
