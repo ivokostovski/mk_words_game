@@ -15,7 +15,7 @@ export class GameInputComponent implements OnInit {
   submitedWord: Word;
   rForm: FormGroup;
   isValid: boolean;
-  timer = 5;
+  timer = 121;
 
   constructor(private fb: FormBuilder) {
     this.rForm = fb.group({
