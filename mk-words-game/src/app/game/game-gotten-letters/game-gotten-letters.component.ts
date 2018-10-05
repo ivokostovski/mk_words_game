@@ -9,7 +9,7 @@ export class GameGottenLettersComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
   fullListOfLetters = ['А', 'Б', 'В', 'Г', 'Д', 'Ѓ', 'Е', 'Ж', 'З', 'Ѕ', 'И', 'Ј', 'К', 'Л',	'Љ', 'М', 'Н', 'Њ',	'О',	'П',	'Р',	'С',	'Т',	'Ќ',	'У',	'Ф',	'Х',	'Ц',	'Ч',	'Џ',	'Ш'];
-  maxNumberOfLetters = 14;
+  maxNumberOfLetters = 12;
   choosenListOfLetters = [];
 
   constructor() { }
@@ -19,7 +19,7 @@ export class GameGottenLettersComponent implements OnInit {
   }
 
   randomNumber() {
-    return Math.round(Math.random() * 31);
+    return Math.floor(Math.random() * 31);
   }
 
   chooseLetters(list: String[]) {

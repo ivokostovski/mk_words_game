@@ -1,0 +1,7 @@
+<div class="row" *ngIf="latestWord">
+  <div class="col-12">
+    <ul *ngFor="let word of submitedWords" class="list-group">
+      <li class="list-group-item my-1" [ngClass]="{'bg-success': word.isValid, 'bg-danger': !word.isValid}">{{word.content}}</li>
+    </ul>
+  </div>
+</div>

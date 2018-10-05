@@ -1,12 +1,19 @@
 <div class="row">
   <div class="col-12">
+    <div class="text-center font-weight-bold">
+      Време: {{ timer }} секунди
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
     <form [formGroup]="rForm" (ngSubmit)="addWord(rForm.value)">
         <div class="form-group text-center">
           <input type="text" maxlength="9" class="form-control" placeholder="Внеси збор" formControlName="content">
             <div class="alert alert-danger mt-1" role="alert" *ngIf="!rForm.controls['content'].valid && rForm.controls['content'].touched">
               Зборот кој го внесуваш треба да биде напишан на кирилица, и да има помеѓу 2 и 9 букви!
             </div>
-          <button type="submit" class="btn btn-lg btn-primary mt-2" [disabled]="!rForm.valid">Внеси</button>
+          <button type="submit" class="btn btn-lg btn-primary mt-2" [disabled]="!rForm.valid || !timer">Внеси</button>
         </div>
     </form>
   </div>

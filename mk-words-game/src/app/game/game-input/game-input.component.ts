@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output} from '@angular/core';
+import { Component, EventEmitter, Output, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Word } from '../../models/word.model';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-game-input',
@@ -8,12 +9,13 @@ import { Word } from '../../models/word.model';
   styleUrls: ['./game-input.component.css']
 })
 
-export class GameInputComponent {
+export class GameInputComponent implements OnInit {
 
-  @Output() notify: EventEmitter<any> = new EventEmitter<any>();
+  @Output() submitedWordNotify: EventEmitter<any> = new EventEmitter<any>();
   submitedWord: Word;
   rForm: FormGroup;
   isValid: boolean;
+  timer = 5;
 
   constructor(private fb: FormBuilder) {
     this.rForm = fb.group({
@@ -21,10 +23,23 @@ export class GameInputComponent {
     });
    }
 
+   ngOnInit() {
+    const myTimer = interval(1000);
+    myTimer.subscribe(() => {
+      if (this.timer > 0) {
+        this.timer--;
+      }
+    });
+   }
+
    addWord(content) {
     this.submitedWord = new Word((content.content).trim().toLowerCase(), this.isValid);
-    this.notify.emit(this.submitedWord);
+    this.submitedWordNotify.emit(this.submitedWord);
     this.rForm.reset();
+   }
+
+   startGame() {
+
    }
 
 

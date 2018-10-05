@@ -12,6 +12,7 @@ import { GameGottenLettersComponent } from './game/game-gotten-letters/game-gott
 import { HttpClientModule } from '@angular/common/http';
 import { DictionaryService } from './services/dictionary.service';
 import { UnicodeConverterService } from './services/unicodeConverter.service';
+import { GameWordsListComponent } from './game/game-words-list/game-words-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { UnicodeConverterService } from './services/unicodeConverter.service';
     FooterComponent,
     HighscoresComponent,
     GameInputComponent,
-    GameGottenLettersComponent
+    GameGottenLettersComponent,
+    GameWordsListComponent,
+
   ],
   imports: [
     BrowserModule,

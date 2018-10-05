@@ -1,9 +1,7 @@
-<app-game-input (notify)="oNsumbitWordClicked($event)"></app-game-input>
-<app-game-gotten-letters></app-game-gotten-letters>
-<div class="row" *ngIf="latestWord">
-  <div class="col-12">
-    <ul *ngFor="let word of submitedWords" class="list-group">
-      <li class="list-group-item my-1" [ngClass]="{'bg-success': word.isValid, 'bg-danger': !word.isValid}">{{word.content}}</li>
-    </ul>
-  </div>
+<div *ngIf="gameStarted">
+  <app-game-input (submitedWordNotify)="childEventClicked($event)"></app-game-input>
+  <app-game-gotten-letters></app-game-gotten-letters>
 </div>
+<div class="bg-success btn-lg text-white text-center" *ngIf="!gameStarted" (click)="gameStarting()">Започни со играта</div>
+<app-game-words-list [submitedWord]="submitedWord"></app-game-words-list>
+
