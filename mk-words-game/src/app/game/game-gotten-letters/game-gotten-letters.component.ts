@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-game-gotten-letters',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameGottenLettersComponent implements OnInit {
 
+  @Output() sendGottenLetters: EventEmitter<any> = new EventEmitter<any>();
+
   // tslint:disable-next-line:max-line-length
   fullListOfLetters = ['А', 'Б', 'В', 'Г', 'Д', 'Ѓ', 'Е', 'Ж', 'З', 'Ѕ', 'И', 'Ј', 'К', 'Л',	'Љ', 'М', 'Н', 'Њ',	'О',	'П',	'Р',	'С',	'Т',	'Ќ',	'У',	'Ф',	'Х',	'Ц',	'Ч',	'Џ',	'Ш'];
-  maxNumberOfLetters = 12;
+  maxNumberOfLetters = 20;
   choosenListOfLetters = [];
   gottenLetters = {'А': 0,
    'Б': 0,
@@ -49,6 +51,7 @@ export class GameGottenLettersComponent implements OnInit {
   ngOnInit() {
     this.chooseLetters(this.fullListOfLetters);
     this.findNumberOfSameLetters();
+    this.sendGottenLetters.emit(this.gottenLetters);
   }
 
   randomNumber() {

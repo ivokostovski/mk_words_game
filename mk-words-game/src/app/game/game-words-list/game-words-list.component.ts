@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 export class GameWordsListComponent implements OnInit, OnChanges {
 
   @Input() submitedWord: Word;
+  @Input() validLetters;
 
   myDictionary;
   convertedWord;
@@ -37,7 +38,12 @@ export class GameWordsListComponent implements OnInit, OnChanges {
   }
 
   oNsumbitWordClicked(newWord: Word) {
-    newWord.isValid = this.checkIfWordIsValidInDictionary(newWord);
+    const invalidLetters = this.checkIfValidLetters(newWord, this.validLetters);
+    if (invalidLetters === 0) {
+      newWord.isValid = this.checkIfWordIsValidInDictionary(newWord);
+    } else if (invalidLetters > 0 || invalidLetters < 0) {
+      newWord.isValid = false;
+    }
     this.latestWord = newWord;
     this.submitedWords.push(newWord);
   }
@@ -53,4 +59,20 @@ export class GameWordsListComponent implements OnInit, OnChanges {
     return valid;
   }
 
+  checkIfValidLetters(word: Word, validLetters: Object) {
+    const letterArray = word.content.split('');
+    let notValidLetters = 0;
+    for (let i = 0; i < letterArray.length; i++) {
+      // tslint:disable-next-line:max-line-length
+      if (validLetters[`${letterArray[i].toUpperCase()}`] > 0) {
+        validLetters[`${letterArray[i].toUpperCase()}`]--;
+      } else {
+        notValidLetters++;
+      }
+    }
+    return notValidLetters;
+  }
+
 }
+
+//

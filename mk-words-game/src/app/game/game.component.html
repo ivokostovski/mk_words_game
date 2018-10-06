@@ -1,7 +1,7 @@
 <div *ngIf="gameStarted">
-  <app-game-input (submitedWordNotify)="childEventClicked($event)"></app-game-input>
-  <app-game-gotten-letters></app-game-gotten-letters>
+  <app-game-input (submitedWordNotify)="gameSubmitedWordNotify($event)"></app-game-input>
+  <app-game-gotten-letters (sendGottenLetters)="gameGottenLetters($event)"></app-game-gotten-letters>
+  <app-game-words-list [submitedWord]="submitedWord" [validLetters]="validLetters"></app-game-words-list>
 </div>
 <div class="bg-success btn-lg text-white text-center" *ngIf="!gameStarted" (click)="gameStarting()">Започни со играта</div>
-<app-game-words-list [submitedWord]="submitedWord"></app-game-words-list>
 

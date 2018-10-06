@@ -11,16 +11,21 @@ export class GameComponent {
 
   public submitedWord: Word;
   public gameStarted = false;
+  public validLetters;
 
   constructor() {
   }
 
-  childEventClicked(word: Word) {
+  gameSubmitedWordNotify(word: Word) {
     this.submitedWord = word;
   }
 
   gameStarting() {
     this.gameStarted = true;
+  }
+
+  gameGottenLetters(event: Object) {
+    this.validLetters = event;
   }
 
 }
