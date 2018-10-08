@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 import { Word } from '../../models/word.model';
 import { DictionaryService } from '../../services/dictionary.service';
 import { UnicodeConverterService } from '../../services/unicodeConverter.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game-words-list',
@@ -14,6 +13,7 @@ export class GameWordsListComponent implements OnInit, OnChanges {
 
   @Input() submitedWord: Word;
   @Input() validLetters;
+  @Output() sendDictionary: EventEmitter<any> = new EventEmitter<any>();
 
   myDictionary;
   convertedWord;
@@ -25,20 +25,18 @@ export class GameWordsListComponent implements OnInit, OnChanges {
   constructor(private dicService: DictionaryService, private converter: UnicodeConverterService) {
   }
 
-  ngOnInit() {
-    this.dicService.getData().subscribe(data => {
+  async ngOnInit() {
+    await this.dicService.getData().subscribe(data => {
       this.myDictionary = data.data;
+      this.sendDictionary.emit(this.myDictionary);
     });
-    // this.originalValidLetters = Object.assign({}, this.validLetters);
   }
 
   ngOnChanges() {
     if (this.disableFirstChange > 0) {
       this.oNsumbitWordClicked(this.submitedWord);
-      // this.validLetters = Object.assign({}, this.originalValidLetters);
     }
     this.disableFirstChange++;
-    // console.log('change оригинал', this.originalValidLetters, 'change валид', this.validLetters);
 
   }
 
@@ -55,12 +53,12 @@ export class GameWordsListComponent implements OnInit, OnChanges {
       newWord.isValid = false;
     }
     this.latestWord = newWord;
-    this.submitedWords.push(newWord);
+    this.submitedWords.unshift(newWord);
   }
 
   checkIfWordIsValidInDictionary(word: Word) {
     let valid = false;
-    this.convertedWord = this.converter.convertWord(word.content);
+    this.convertedWord = this.converter.convertWordToUnicode(word.content);
     for (let i = 0; i < this.myDictionary.length; i++) {
       if (this.convertedWord === this.myDictionary[i].lexeme) {
         valid = true;
@@ -81,7 +79,6 @@ export class GameWordsListComponent implements OnInit, OnChanges {
         notValidLetters++;
       }
     }
-    console.log('temp', tempValidLet, 'inside', validLet, 'global', this.validLetters);
     return notValidLetters;
   }
 

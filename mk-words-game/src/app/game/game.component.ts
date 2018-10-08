@@ -12,8 +12,13 @@ export class GameComponent {
   public submitedWord: Word;
   public gameStarted = false;
   public validLetters;
+  public dictionary;
 
   constructor() {
+  }
+
+  transferDictionary(dictionary: any) {
+    this.dictionary = dictionary;
   }
 
   gameSubmitedWordNotify(word: Word) {

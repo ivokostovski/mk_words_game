@@ -5,21 +5,36 @@ export class UnicodeConverterService {
 
   constructor() {}
 
-  convertWord(word: string) {
+  convertWordToUnicode(word: string) {
     const convertedWord = [];
     const newWordArray = [];
     let newWord = '';
     convertedWord.push(word.split(''));
     for (let i = 0; i < convertedWord.length; i++) {
-      const convertedLetter = this.convertLetters(convertedWord[i]);
+      const convertedLetter = this.convertLettersToUnicode(convertedWord[i]);
       newWordArray.push(convertedLetter);
     }
     newWord = newWordArray.join();
     newWord = newWord.replace(/,/g, '');
+    console.log(newWord);
+    return newWord;
+  }
+  convertWordToCyrillic(word: string) {
+    const convertedWord = [];
+    const newWordArray = [];
+    let newWord = '';
+    convertedWord.push(word.split(''));
+    for (let i = 0; i < convertedWord.length; i++) {
+      const convertedLetter = this.convertUnicodeТоLetters(convertedWord[i]);
+      newWordArray.push(convertedLetter);
+    }
+    newWord = newWordArray.join();
+    newWord = newWord.replace(/,/g, '');
+    console.log(newWord);
     return newWord;
   }
 
-  convertLetters(letter: string) {
+  convertLettersToUnicode(letter: string) {
     switch (letter) {
       case 'а':
         letter = '\u0430';
@@ -113,6 +128,107 @@ export class UnicodeConverterService {
         break;
       case 'ш':
         letter = '\u0448';
+        break;
+
+      default:
+        break;
+    }
+    return letter;
+  }
+  convertUnicodeТоLetters(letter: string) {
+    switch (letter) {
+      case '\u0430':
+        letter = 'а';
+        break;
+      case '\u0431':
+        letter = 'б';
+        break;
+      case '\u0432':
+        letter = 'в';
+        break;
+      case '\u0433':
+        letter = 'г';
+        break;
+      case '\u0434':
+        letter = 'д';
+        break;
+      case '\u0453':
+        letter = 'ѓ';
+        break;
+      case '\u0435':
+        letter = 'е';
+        break;
+      case '\u0436':
+        letter = 'ж';
+        break;
+      case '\u0437':
+        letter = 'з';
+        break;
+      case '\u0455':
+        letter = 'ѕ';
+        break;
+      case '\u0438':
+        letter = 'и';
+        break;
+      case '\u0458':
+        letter = 'ј';
+        break;
+      case '\u043A':
+        letter = 'к';
+        break;
+      case '\u043B':
+        letter = 'л';
+        break;
+      case '\u0459':
+        letter = 'љ';
+        break;
+      case '\u043C':
+        letter = 'м';
+        break;
+      case '\u043D':
+        letter = 'н';
+        break;
+      case '\u045A':
+        letter = 'њ';
+        break;
+      case '\u043E':
+        letter = 'о';
+        break;
+      case '\u043F':
+        letter = 'п';
+        break;
+      case '\u0440':
+        letter = 'р';
+        break;
+      case '\u0441':
+        letter = 'с';
+        break;
+      case '\u0442':
+        letter = 'т';
+        break;
+      case '\u045C':
+        letter = 'ќ';
+        break;
+      case '\u0443':
+        letter = 'у';
+        break;
+      case '\u0444':
+        letter = 'ф';
+        break;
+      case '\u0445':
+        letter = 'х';
+        break;
+      case '\u0446':
+        letter = 'ц';
+        break;
+      case '\u0447':
+        letter = 'ч';
+        break;
+      case '\u045F':
+        letter = 'џ';
+        break;
+      case '\u0448':
+        letter = 'ш';
         break;
 
       default:
