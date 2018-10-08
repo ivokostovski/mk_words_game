@@ -15,6 +15,7 @@ export class GameWordsListComponent implements OnInit, OnChanges {
   @Input() submitedWord: Word;
   @Input() validLetters;
 
+  originalValidLetters;
   myDictionary;
   convertedWord;
   submitedWords: Word[] = [];
@@ -28,13 +29,17 @@ export class GameWordsListComponent implements OnInit, OnChanges {
     this.dicService.getData().subscribe(data => {
       this.myDictionary = data.data;
     });
+    // this.originalValidLetters = Object.assign({}, this.validLetters);
   }
 
   ngOnChanges() {
     if (this.disableFirstChange > 0) {
       this.oNsumbitWordClicked(this.submitedWord);
+      // this.validLetters = Object.assign({}, this.originalValidLetters);
     }
     this.disableFirstChange++;
+    // console.log('change оригинал', this.originalValidLetters, 'change валид', this.validLetters);
+
   }
 
   oNsumbitWordClicked(newWord: Word) {
@@ -59,17 +64,19 @@ export class GameWordsListComponent implements OnInit, OnChanges {
     return valid;
   }
 
-  checkIfValidLetters(word: Word, validLetters: Object) {
+  checkIfValidLetters(word: Word, validLet: any) {
     const letterArray = word.content.split('');
     let notValidLetters = 0;
+    const tempValidLet = Object.assign({}, validLet);
     for (let i = 0; i < letterArray.length; i++) {
       // tslint:disable-next-line:max-line-length
-      if (validLetters[`${letterArray[i].toUpperCase()}`] > 0) {
-        validLetters[`${letterArray[i].toUpperCase()}`]--;
+      if (tempValidLet[`${letterArray[i].toUpperCase()}`] > 0) {
+        tempValidLet[`${letterArray[i].toUpperCase()}`]--;
       } else {
         notValidLetters++;
       }
     }
+    console.log('temp', tempValidLet, 'inside', validLet, 'global', this.validLetters);
     return notValidLetters;
   }
 
