@@ -15,12 +15,12 @@ export class GameWordsListComponent implements OnInit, OnChanges {
   @Input() submitedWord: Word;
   @Input() validLetters;
 
-  originalValidLetters;
   myDictionary;
   convertedWord;
   submitedWords: Word[] = [];
   latestWord: Word;
   disableFirstChange = 0;
+  wordExist = false;
 
   constructor(private dicService: DictionaryService, private converter: UnicodeConverterService) {
   }
@@ -43,6 +43,11 @@ export class GameWordsListComponent implements OnInit, OnChanges {
   }
 
   oNsumbitWordClicked(newWord: Word) {
+    this.wordExist = this.wordAlreadyEntered(newWord, this.submitedWords);
+    if (this.wordExist) {
+      return;
+    }
+
     const invalidLetters = this.checkIfValidLetters(newWord, this.validLetters);
     if (invalidLetters === 0) {
       newWord.isValid = this.checkIfWordIsValidInDictionary(newWord);
@@ -78,6 +83,16 @@ export class GameWordsListComponent implements OnInit, OnChanges {
     }
     console.log('temp', tempValidLet, 'inside', validLet, 'global', this.validLetters);
     return notValidLetters;
+  }
+
+  wordAlreadyEntered(word: Word, wordArray: Word[]) {
+    for (let i = 0; i < wordArray.length; i++) {
+      if (wordArray[i].content.toUpperCase() === word.content.toUpperCase()) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 
 }

@@ -1,5 +1,8 @@
 <div class="row" *ngIf="latestWord">
   <div class="col-12">
+    <div class="alert alert-danger mt-1" role="alert" *ngIf="wordExist">
+        Зборот е веќе внесен! Обиди се со друг збор.
+    </div>
     <ul *ngFor="let word of submitedWords" class="list-group">
       <li class="list-group-item my-1" [ngClass]="{'bg-success': word.isValid, 'bg-danger': !word.isValid}">{{word.content}}</li>
     </ul>
