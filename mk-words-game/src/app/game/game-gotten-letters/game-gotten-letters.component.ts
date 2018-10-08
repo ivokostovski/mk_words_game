@@ -71,17 +71,15 @@ export class GameGottenLettersComponent implements OnInit {
     const splitUpWord = largeWords[randomNumber].split('');
 
     for (let j = 0; j < splitUpWord.length; j++) {
-      if (j % 2 === 0) {
-        this.choosenRandomWord.push(splitUpWord[j]);
-      } else if (j % 2 === 1) {
-        this.choosenRandomWord.unshift(splitUpWord[j]);
+      if (splitUpWord[j] !== '-') {
+        if (j % 2 === 0) {
+          this.choosenRandomWord.push(splitUpWord[j]);
+        } else if (j % 2 === 1) {
+          this.choosenRandomWord.unshift(splitUpWord[j]);
+        }
       }
     }
     this.findNumberOfSameLetters();
-  }
-
-  randomNumber() {
-    return Math.floor(Math.random() * this.choosenRandomWord.length);
   }
 
   findNumberOfSameLetters() {
