@@ -1,20 +1,17 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { UnicodeConverterService } from 'src/app/services/unicodeConverter.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game-gotten-letters',
   templateUrl: './game-gotten-letters.component.html',
   styleUrls: ['./game-gotten-letters.component.css']
 })
-export class GameGottenLettersComponent implements OnInit {
+export class GameGottenLettersComponent implements OnInit, OnChanges  {
 
   @Output() sendGottenLetters: EventEmitter<any> = new EventEmitter<any>();
   @Input() myDictionary;
 
-  // tslint:disable-next-line:max-line-length
-  // fullListOfLetters = ['А', 'Б', 'В', 'Г', 'Д', 'Ѓ', 'Е', 'Ж', 'З', 'Ѕ', 'И', 'Ј', 'К', 'Л',	'Љ', 'М', 'Н', 'Њ',	'О',	'П',	'Р',	'С',	'Т',	'Ќ',	'У',	'Ф',	'Х',	'Ц',	'Ч',	'Џ',	'Ш'];
   maxNumberOfLetters = 12;
   choosenRandomWord = [];
   gottenLetters = {'А': 0,
@@ -50,14 +47,17 @@ export class GameGottenLettersComponent implements OnInit {
    'Ш': 0
   };
 
-  constructor(private dicService: DictionaryService, private converter: UnicodeConverterService) {}
+  constructor() {}
 
   ngOnInit() {
-    setTimeout(() => {
-      this.chooseRandomWord();
-    }, 1000);
     this.sendGottenLetters.emit(this.gottenLetters);
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['myDictionary'] && !changes['myDictionary'].firstChange) {
+        this.chooseRandomWord();
+    }
+}
 
   chooseRandomWord() {
     this.choosenRandomWord = [];

@@ -25,8 +25,8 @@ export class GameWordsListComponent implements OnInit, OnChanges {
   constructor(private dicService: DictionaryService, private converter: UnicodeConverterService) {
   }
 
-  async ngOnInit() {
-    await this.dicService.getData().subscribe(data => {
+  ngOnInit() {
+    this.dicService.getData().subscribe(data => {
       this.myDictionary = data.data;
       this.sendDictionary.emit(this.myDictionary);
     });
