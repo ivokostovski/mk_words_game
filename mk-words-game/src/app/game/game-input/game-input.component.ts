@@ -24,12 +24,13 @@ export class GameInputComponent implements OnInit {
    }
 
    ngOnInit() {
-    const myTimer = interval(1000);
-    myTimer.subscribe(() => {
+     setTimeout(() => {
+      const myTimer = interval(1000);
+      myTimer.subscribe(() => {
       if (this.timer > 0) {
         this.timer--;
-      }
-    });
+      }});
+     }, 500);
    }
 
    addWord(content) {
@@ -37,10 +38,4 @@ export class GameInputComponent implements OnInit {
     this.submitedWordNotify.emit(this.submitedWord);
     this.rForm.reset();
    }
-
-   startGame() {
-
-   }
-
-
 }

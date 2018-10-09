@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { GameComponent } from './game/game.component';
@@ -9,10 +10,14 @@ import { FooterComponent } from './footer/footer.component';
 import { HighscoresComponent } from './highscores/highscores.component';
 import { GameInputComponent } from './game/game-input/game-input.component';
 import { GameGottenLettersComponent } from './game/game-gotten-letters/game-gotten-letters.component';
-import { HttpClientModule } from '@angular/common/http';
+import { GameWordsListComponent } from './game/game-words-list/game-words-list.component';
+
 import { DictionaryService } from './services/dictionary.service';
 import { UnicodeConverterService } from './services/unicodeConverter.service';
-import { GameWordsListComponent } from './game/game-words-list/game-words-list.component';
+import { UserService } from './services/user.service';
+import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './auth/login/login/login.component';
+import { SignupComponent } from './auth/signup/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -24,15 +29,18 @@ import { GameWordsListComponent } from './game/game-words-list/game-words-list.c
     GameInputComponent,
     GameGottenLettersComponent,
     GameWordsListComponent,
+    LoginComponent,
+    SignupComponent,
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
-  providers: [DictionaryService, UnicodeConverterService],
+  providers: [DictionaryService, UnicodeConverterService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

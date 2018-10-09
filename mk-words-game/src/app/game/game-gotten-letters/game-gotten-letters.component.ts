@@ -1,6 +1,4 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { DictionaryService } from 'src/app/services/dictionary.service';
-import { UnicodeConverterService } from 'src/app/services/unicodeConverter.service';
 
 @Component({
   selector: 'app-game-gotten-letters',
@@ -46,6 +44,7 @@ export class GameGottenLettersComponent implements OnInit, OnChanges  {
    'Џ': 0,
    'Ш': 0
   };
+  lettersReady = false;
 
   constructor() {}
 
@@ -56,6 +55,7 @@ export class GameGottenLettersComponent implements OnInit, OnChanges  {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['myDictionary'] && !changes['myDictionary'].firstChange) {
         this.chooseRandomWord();
+        this.lettersReady = true;
     }
 }
 
