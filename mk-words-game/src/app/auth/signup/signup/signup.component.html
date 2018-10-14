@@ -1,3 +1,27 @@
-<p>
-  signup works!
-</p>
+<div class="container">
+    <div class="row px-5">
+      <div class="col-12">
+        <form [formGroup]="signupForm" (ngSubmit)="signup(signupForm.value)">
+          <div class="form-group text-center">
+
+            <input type="text" class="form-control mt-2" placeholder="Име" formControlName="name" required>
+            <div class="alert alert-danger mt-1" role="alert" *ngIf="!signupForm.controls['name'].valid && signupForm.controls['name'].touched">
+              Внеси име!
+            </div>
+
+            <input type="email" class="form-control mt-2" placeholder="Е-пошта" formControlName="email" required>
+            <div class="alert alert-danger mt-1" role="alert" *ngIf="!signupForm.controls['email'].valid && signupForm.controls['email'].touched">
+              Внеси корисничко име!
+            </div>
+
+            <input type="password" class="form-control mt-2" placeholder="Лозинка" formControlName="password" required>
+            <div class="alert alert-danger mt-1" role="alert" *ngIf="!signupForm.controls['password'].valid && signupForm.controls['password'].touched">
+              Внеси лозинка!
+            </div>
+
+            <button type="submit" class="btn btn-lg btn-primary mt-2" [disabled]="!signupForm.valid">Регистрирај се</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

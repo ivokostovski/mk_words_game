@@ -1,3 +1,22 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <div class="row px-5">
+    <div class="col-12">
+      <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+        <div class="form-group text-center">
+
+          <input type="email" class="form-control mt-2" placeholder="Корисничко име" formControlName="email" required>
+          <div class="alert alert-danger mt-1" role="alert" *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].touched">
+            Внеси корисничко име!
+          </div>
+
+          <input type="password" class="form-control mt-2" placeholder="Лозинка" formControlName="password" required>
+          <div class="alert alert-danger mt-1" role="alert" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
+            Внеси лозинка!
+          </div>
+
+          <button type="submit" class="btn btn-lg btn-primary mt-2" [disabled]="!loginForm.valid">Логирај се</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

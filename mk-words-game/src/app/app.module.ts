@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { GameComponent } from './game/game.component';
@@ -14,10 +14,10 @@ import { GameWordsListComponent } from './game/game-words-list/game-words-list.c
 
 import { DictionaryService } from './services/dictionary.service';
 import { UnicodeConverterService } from './services/unicodeConverter.service';
-import { UserService } from './services/user.service';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './auth/login/login/login.component';
 import { SignupComponent } from './auth/signup/signup/signup.component';
+import { AuthInterceptor } from './auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -30,8 +30,7 @@ import { SignupComponent } from './auth/signup/signup/signup.component';
     GameGottenLettersComponent,
     GameWordsListComponent,
     LoginComponent,
-    SignupComponent,
-
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +39,7 @@ import { SignupComponent } from './auth/signup/signup/signup.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [DictionaryService, UnicodeConverterService, UserService],
+  providers: [DictionaryService, UnicodeConverterService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
