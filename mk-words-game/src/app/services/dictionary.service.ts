@@ -7,8 +7,6 @@ export class DictionaryService {
   constructor(private http: HttpClient) {}
 
   getData() {
-    return this.http.get<MkDictionary>(
-      'https://raw.githubusercontent.com/ivokostovski/mk_words_game/master/mk-words-game/src/db/db_mkdwords.json'
-    );
+    return this.http.get<MkDictionary>('http://localhost:4200/assets/data.json');
   }
 }
