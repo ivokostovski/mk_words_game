@@ -35,6 +35,10 @@ export class UserService {
       });
   }
 
+  getUserUpdateListener() {
+    return this.usersUpdated.asObservable();
+  }
+
   getUser(id: string) {
     return this.http.get<{ _id: string; name: string; email: string; points: number }>(
       "http://localhost:3000/api/user/" + id

@@ -1,3 +1,18 @@
-<p>
-  highscores works!
-</p>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th class="click-cursor" scope="col" [class.active]="order === 'points'"
+      (click)="setOrder('points')">Points <span [hidden]="reverse">▼</span
+        ><span [hidden]="!reverse">▲</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users | orderBy: order:reverse">
+      <th scope="row"></th>
+      <td>{{ user.name }}</td>
+      <td>{{ user.points }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -6,7 +6,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { GameComponent } from './game/game.component';
 import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { HighscoresComponent } from './highscores/highscores.component';
 import { GameInputComponent } from './game/game-input/game-input.component';
 import { GameGottenLettersComponent } from './game/game-gotten-letters/game-gotten-letters.component';
@@ -20,12 +19,13 @@ import { SignupComponent } from './auth/signup/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { UserProfileComponent } from './game/user-profile/user-profile.component';
 
+import { OrderModule } from 'ngx-order-pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
     GameComponent,
     HeaderComponent,
-    FooterComponent,
     HighscoresComponent,
     GameInputComponent,
     GameGottenLettersComponent,
@@ -39,7 +39,8 @@ import { UserProfileComponent } from './game/user-profile/user-profile.component
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    OrderModule
   ],
   providers: [DictionaryService, UnicodeConverterService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
