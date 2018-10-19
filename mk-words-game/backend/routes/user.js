@@ -59,4 +59,35 @@ router.post("/login", (req, res, next) => {
     });
 });
 
+router.get("", (req, res, next) => {
+  User.find().then(users => {
+    res.status(200).json({
+      message: "Posts fetched successfully!",
+      users: users
+    });
+  });
+});
+
+router.get("/:id", (req, res, next) => {
+  User.findById(req.params.id).then(user => {
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: "User not found!" });
+    }
+  });
+});
+
+router.patch("/:id", (req, res, next) => {
+  const user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: hash,
+    points: req.body.points
+  })
+  User.updateOne({ _id: req.params.id }, user).then(result => {
+    res.status(200).json({ message: "Update successful!" });
+  });
+});
+
 module.exports = router;

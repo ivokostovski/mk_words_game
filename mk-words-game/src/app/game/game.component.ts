@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Word } from '../models/word.model';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-game',
@@ -7,14 +8,21 @@ import { Word } from '../models/word.model';
   styleUrls: ['./game.component.css']
 })
 
-export class GameComponent {
+export class GameComponent implements OnInit {
 
   public submitedWord: Word;
   public gameStarted = false;
   public validLetters;
   public dictionary;
 
-  constructor() {
+  constructor(private userService: UserService) {
+  }
+
+  ngOnInit() {
+    this.userService.getUser("5bc37d1d8778a237d0700708").subscribe(user => {
+      console.log(user);
+    })
+    
   }
 
   transferDictionary(dictionary: any) {

@@ -6,6 +6,7 @@ import { SignupComponent } from './auth/signup/signup/signup.component';
 
 const routes: Routes = [
   { path: '', component: GameComponent },
+  { path: 'edit/:userId', component: GameComponent },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent}
 ];
