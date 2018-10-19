@@ -12,17 +12,14 @@ export class GameComponent implements OnInit {
 
   public submitedWord: Word;
   public gameStarted = false;
+  public newGame = false;
   public validLetters;
   public dictionary;
 
   constructor(private userService: UserService) {
   }
 
-  ngOnInit() {
-    this.userService.getUser("5bc37d1d8778a237d0700708").subscribe(user => {
-      console.log(user);
-    })
-    
+  ngOnInit() {    
   }
 
   transferDictionary(dictionary: any) {
@@ -36,9 +33,18 @@ export class GameComponent implements OnInit {
   gameStarting() {
     this.gameStarted = true;
   }
+  
+  newGameStarting() {
+    this.newGame = false;
+  }
 
   gameGottenLetters(event: Object) {
     this.validLetters = event;
+  }
+
+  gameEnded(event: Event) {
+    this.gameStarted = false;
+    this.newGame = true;
   }
 
 }

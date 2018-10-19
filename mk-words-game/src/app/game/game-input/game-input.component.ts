@@ -12,10 +12,12 @@ import { interval } from 'rxjs';
 export class GameInputComponent implements OnInit {
 
   @Output() submitedWordNotify: EventEmitter<any> = new EventEmitter<any>();
+  @Output() gameEndedNotify: EventEmitter<any> = new EventEmitter<any>();
+  gameEnded = true;
   submitedWord: Word;
   rForm: FormGroup;
   isValid: boolean;
-  timer = 60;
+  timer = 5;
 
   constructor(private fb: FormBuilder) {
     this.rForm = fb.group({
@@ -29,7 +31,10 @@ export class GameInputComponent implements OnInit {
       myTimer.subscribe(() => {
       if (this.timer > 0) {
         this.timer--;
-      }});
+      } else if (this.timer <= 0) {
+        this.gameEndedNotify.emit(this.gameEnded)
+      }
+    });
      }, 500);
    }
 
