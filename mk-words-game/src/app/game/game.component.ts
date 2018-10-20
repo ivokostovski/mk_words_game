@@ -3,7 +3,6 @@ import { Word } from '../models/word.model';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
-import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-game',

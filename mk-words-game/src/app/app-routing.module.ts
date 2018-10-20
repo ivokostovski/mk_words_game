@@ -6,9 +6,8 @@ import { SignupComponent } from './auth/signup/signup/signup.component';
 import { HighscoresComponent } from './highscores/highscores.component';
 
 const routes: Routes = [
-  { path: '', component: GameComponent },
+  { path: 'game', component: GameComponent },
   { path: 'edit/:userId', component: GameComponent },
-  { path: 'game/:userId', component: GameComponent },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'highscores', component: HighscoresComponent}

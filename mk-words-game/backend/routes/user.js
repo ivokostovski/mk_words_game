@@ -49,6 +49,7 @@ router.post("/login", (req, res, next) => {
       );
       res.status(200).json({
         token: token,
+        id: fetchedUser._id,
         expiresIn: 3600
       });
     })
@@ -72,16 +73,6 @@ router.get("/:id", (req, res, next) => {
   User.findById(req.params.id).then(user => {
     if (user) {
       res.status(200).json(user);
-    } else {
-      res.status(404).json({ message: "User not found!" });
-    }
-  });
-});
-
-router.get("/:email", (req, res, next) => {
-  User.findOne(req.params.email).then(user => {
-    if (user) {
-      res.status(200).json(user._id);
     } else {
       res.status(404).json({ message: "User not found!" });
     }

@@ -45,10 +45,6 @@ export class UserService {
     );
   }
 
-  getUserId(email: string) {
-    return this.http.get<{ _id: string}>('http://localhost:3000/api/user/' + email);
-  }
-
   updateUser(id: string, name: string, email: string, points: number) {
     const user: AuthData = { id: id, name: name, email: email, points: points };
     this.http

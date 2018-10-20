@@ -10,6 +10,7 @@ import { UserService } from './user.service';
 export class AuthService {
 
   private isAuthenticated = false;
+  private loggedInUserId: string;
   private token: string;
   private authStatusListener = new Subject<boolean>();
 
@@ -21,6 +22,10 @@ export class AuthService {
 
   getIsAuth() {
     return this.isAuthenticated;
+  }
+
+  getUserId() {
+    return this.loggedInUserId;
   }
 
   getAuthStatusListener() {
@@ -36,18 +41,14 @@ export class AuthService {
 
   loginUser(email: string, password: string) {
     const authData: AuthData = {name: name, email: email, password: password};
-    let userId: string;
-    this.http.post<{token: string}>('http://localhost:3000/api/user/login', authData).subscribe(response => {
+    this.http.post<{token: string, id: string}>('http://localhost:3000/api/user/login', authData).subscribe(response => {
       const token = response.token;
       this.token = token;
+      this.loggedInUserId = response.id;
       if (token) {
-      this.userService.getUserId(email).subscribe(id => {
-        userId = id._id;
-        console.log(userId);
-      });
         this.isAuthenticated = true;
         this.authStatusListener.next(true);
-        this.router.navigate([`/user/game:${userId}`]);
+        this.router.navigate(['/']);
       }
     });
   }
