@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Word } from '../models/word.model';
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-game',
@@ -8,18 +11,24 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./game.component.css']
 })
 
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
 
   public submitedWord: Word;
   public gameStarted = false;
   public newGame = false;
   public validLetters;
   public dictionary;
+  public userIsAuthenticated = false;
+  private authStatusSub: Subscription;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private authService: AuthService) {
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(isAuthenticated => {
+      this.userIsAuthenticated = isAuthenticated;
+    });
   }
 
   transferDictionary(dictionary: any) {
@@ -33,7 +42,7 @@ export class GameComponent implements OnInit {
   gameStarting() {
     this.gameStarted = true;
   }
-  
+
   newGameStarting() {
     this.newGame = false;
   }
@@ -47,4 +56,7 @@ export class GameComponent implements OnInit {
     this.newGame = true;
   }
 
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
+  }
 }

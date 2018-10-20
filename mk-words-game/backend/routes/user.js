@@ -78,6 +78,16 @@ router.get("/:id", (req, res, next) => {
   });
 });
 
+router.get("/:email", (req, res, next) => {
+  User.findOne(req.params.email).then(user => {
+    if (user) {
+      res.status(200).json(user._id);
+    } else {
+      res.status(404).json({ message: "User not found!" });
+    }
+  });
+});
+
 router.patch("/:id", (req, res, next) => {
   const user = new User({
     name: req.body.name,

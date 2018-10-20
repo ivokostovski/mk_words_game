@@ -3,6 +3,5 @@
   <app-game-gotten-letters (sendGottenLetters)="gameGottenLetters($event)" [myDictionary]="dictionary"></app-game-gotten-letters>
   <app-game-words-list (sendDictionary)="transferDictionary($event)" [submitedWord]="submitedWord" [validLetters]="validLetters"></app-game-words-list>
 </div>
-<div class="bg-success btn-lg text-white text-center" *ngIf="!gameStarted && !newGame" (click)="gameStarting()">Започни со играта</div>
-<div class="bg-success btn-lg text-white text-center" *ngIf="newGame" (click)="newGameStarting()">Започни со нова игра</div>
+<div class="bg-success btn-lg text-white text-center" *ngIf="!gameStarted && userIsAuthenticated" (click)="gameStarting()" [routerLink]="['/user/game']">Започни со нова игра</div>
 

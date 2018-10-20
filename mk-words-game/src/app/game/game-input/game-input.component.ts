@@ -17,7 +17,7 @@ export class GameInputComponent implements OnInit {
   submitedWord: Word;
   rForm: FormGroup;
   isValid: boolean;
-  timer = 5;
+  timer = 60;
 
   constructor(private fb: FormBuilder) {
     this.rForm = fb.group({
@@ -32,14 +32,14 @@ export class GameInputComponent implements OnInit {
       if (this.timer > 0) {
         this.timer--;
       } else if (this.timer <= 0) {
-        this.gameEndedNotify.emit(this.gameEnded)
+        this.gameEndedNotify.emit(this.gameEnded);
       }
     });
      }, 500);
    }
 
    addWord(content) {
-    this.submitedWord = new Word((content.content).trim().toLowerCase(), this.isValid);
+    this.submitedWord = new Word((content.content).trim().toLowerCase(), this.isValid, 0);
     this.submitedWordNotify.emit(this.submitedWord);
     this.rForm.reset();
    }

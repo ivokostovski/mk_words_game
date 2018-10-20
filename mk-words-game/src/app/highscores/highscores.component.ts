@@ -11,8 +11,8 @@ import { OrderPipe } from 'ngx-order-pipe';
 export class HighscoresComponent implements OnInit {
 
   users: AuthData[] = [];
-  order: string = 'user.points';
-  reverse: boolean = false;
+  order = 'user.points';
+  reverse = false;
 
   constructor(private userService: UserService, private orderPipe: OrderPipe) {
   }
@@ -22,7 +22,7 @@ export class HighscoresComponent implements OnInit {
     this.userService.getUserUpdateListener().subscribe(users => {
       this.users = users;
       this.users = this.orderPipe.transform(this.users, 'user.points');
-    })
+    });
   }
 
   setOrder(value: string) {

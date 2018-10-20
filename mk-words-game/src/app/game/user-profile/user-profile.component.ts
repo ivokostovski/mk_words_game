@@ -12,6 +12,9 @@ export class UserProfileComponent implements OnInit {
   private mode = 'create';
   private userId: string;
 
+  public totalPoints;
+  public showcurrentGamePoints: number;
+
   constructor(public route: ActivatedRoute, private userService: UserService) { }
 
   ngOnInit() {
@@ -24,9 +27,6 @@ export class UserProfileComponent implements OnInit {
         this.userId = null;
       }
     });
-
-    
   }
-
 
 }

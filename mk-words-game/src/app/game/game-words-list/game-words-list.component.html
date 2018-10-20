@@ -1,10 +1,18 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        Поени во моментална игра: {{ currentGameTotalPoints }} || Вкупно поени:
+      </div>
+    </div>
+</div>
 <div class="row" *ngIf="latestWord">
   <div class="col-12">
     <div class="alert alert-danger mt-1" role="alert" *ngIf="wordExist">
-        Зборот е веќе внесен! Обиди се со друг збор.
+      Зборот е веќе внесен! Обиди се со друг збор.
     </div>
     <ul *ngFor="let word of submitedWords" class="list-group">
-      <li class="list-group-item my-1" [ngClass]="{'bg-success': word.isValid, 'bg-danger': !word.isValid}">{{word.content}}</li>
+      <li class="list-group-item my-1" [ngClass]="{'bg-success': word.isValid, 'bg-danger': !word.isValid}">{{word.content}}<span
+          *ngIf="word.points" class="font-weight-bold"> | {{word.points}} поени</span></li>
     </ul>
   </div>
 </div>

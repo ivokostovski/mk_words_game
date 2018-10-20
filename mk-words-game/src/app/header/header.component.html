@@ -25,7 +25,7 @@
         <a class="nav-link" routerLink="/login">Логирај се</a>
       </li>
       <li class="nav-item" *ngIf="userIsAuthenticated">
-        <a class="nav-link">Одлогирај се</a>
+        <a class="nav-link" (click)="onLogout()">Одлогирај се</a>
       </li>
     </ul>
   </div>

@@ -21,6 +21,7 @@ export class GameWordsListComponent implements OnInit, OnChanges {
   latestWord: Word;
   disableFirstChange = 0;
   wordExist = false;
+  currentGameTotalPoints: number;
 
   constructor(private dicService: DictionaryService, private converter: UnicodeConverterService) {
   }
@@ -30,6 +31,7 @@ export class GameWordsListComponent implements OnInit, OnChanges {
       this.myDictionary = data.data;
       this.sendDictionary.emit(this.myDictionary);
     });
+    this.currentGameTotalPoints = 0;
   }
 
   ngOnChanges() {
@@ -37,7 +39,6 @@ export class GameWordsListComponent implements OnInit, OnChanges {
       this.oNsumbitWordClicked(this.submitedWord);
     }
     this.disableFirstChange++;
-
   }
 
   oNsumbitWordClicked(newWord: Word) {
@@ -53,6 +54,10 @@ export class GameWordsListComponent implements OnInit, OnChanges {
       newWord.isValid = false;
     }
     this.latestWord = newWord;
+    if (this.latestWord.isValid) {
+      newWord.points = this.calculatePointsForEachWord(this.latestWord.content);
+      this.currentGameTotalPoints += newWord.points;
+    }
     this.submitedWords.unshift(newWord);
   }
 
@@ -90,6 +95,10 @@ export class GameWordsListComponent implements OnInit, OnChanges {
         return false;
       }
     }
+  }
+
+  calculatePointsForEachWord(word: string) {
+    return word.split('').length;
   }
 
 }
