@@ -4,19 +4,19 @@ import { GameComponent } from './game/game.component';
 import { LoginComponent } from './auth/login/login/login.component';
 import { SignupComponent } from './auth/signup/signup/signup.component';
 import { HighscoresComponent } from './highscores/highscores.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  { path: 'game', component: GameComponent },
-  { path: 'edit/:userId', component: GameComponent },
+  { path: 'game', component: GameComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
-  { path: 'highscores', component: HighscoresComponent}
+  { path: 'highscores', component: HighscoresComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 
 export class AppRoutingModule {}
-
