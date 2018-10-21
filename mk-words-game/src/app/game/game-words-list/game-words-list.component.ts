@@ -13,6 +13,7 @@ import { Word } from '../../models/word.model';
 import { DictionaryService } from '../../services/dictionary.service';
 import { UnicodeConverterService } from '../../services/unicodeConverter.service';
 import { UserService } from '../../services/user.service';
+import { PointsService } from '../../services/points.service';
 
 @Component({
   selector: 'app-game-words-list',
@@ -34,11 +35,12 @@ export class GameWordsListComponent implements OnInit, OnChanges {
   disableFirstChange = 0;
   wordExist = false;
   currentGameTotalPoints: number;
+  totalUserPoints = 0;
 
   constructor(
     private dicService: DictionaryService,
     private converter: UnicodeConverterService,
-    private userService: UserService
+    private pointsService: PointsService
   ) {}
 
   ngOnInit() {
@@ -47,6 +49,12 @@ export class GameWordsListComponent implements OnInit, OnChanges {
       this.sendDictionary.emit(this.myDictionary);
     });
     this.currentGameTotalPoints = 0;
+    this.pointsService.getUserTotalPoints().then(points => {
+      this.totalUserPoints = points;
+      console.log(points);
+    }).catch(error => {
+      return;
+    });
   }
 
   ngOnChanges() {
@@ -73,6 +81,7 @@ export class GameWordsListComponent implements OnInit, OnChanges {
       newWord.points = this.calculatePointsForEachWord(this.latestWord.content);
       this.currentGameTotalPoints += newWord.points;
     }
+    this.pointsService.addPointsForCurrentGame(newWord.points);
     this.submitedWords.unshift(newWord);
   }
 

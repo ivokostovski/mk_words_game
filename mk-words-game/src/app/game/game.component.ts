@@ -3,6 +3,7 @@ import { Word } from '../models/word.model';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
+import { PointsService } from '../services/points.service';
 
 @Component({
   selector: 'app-game',
@@ -14,13 +15,13 @@ export class GameComponent implements OnInit, OnDestroy {
 
   public submitedWord: Word;
   public gameStarted = false;
-  public newGame = false;
   public validLetters;
   public dictionary;
   public userIsAuthenticated = false;
   private authStatusSub: Subscription;
+  latestGamePoints: number;
 
-  constructor(private userService: UserService, private authService: AuthService) {
+  constructor(private userService: UserService, private authService: AuthService, private pointsService: PointsService) {
   }
 
   ngOnInit() {
@@ -48,9 +49,13 @@ export class GameComponent implements OnInit, OnDestroy {
 
   gameEnded(event: Event) {
     this.gameStarted = false;
+    this.pointsService.addPointsToUser();
+    this.latestGamePoints = this.pointsService.getLatestGamePoints();
   }
 
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();
   }
+
+
 }

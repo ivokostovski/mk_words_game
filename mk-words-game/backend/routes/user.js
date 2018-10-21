@@ -81,9 +81,10 @@ router.get("/:id", (req, res, next) => {
 
 router.patch("/:id", (req, res, next) => {
   const user = new User({
+    _id: req.body.id,
     name: req.body.name,
     email: req.body.email,
-    password: hash,
+    password: req.body.password,
     points: req.body.points
   })
   User.updateOne({ _id: req.params.id }, user).then(result => {

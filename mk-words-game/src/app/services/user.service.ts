@@ -40,21 +40,16 @@ export class UserService {
   }
 
   getUser(id: string) {
-    return this.http.get<{ _id: string; name: string; email: string; points: number }>(
+    return this.http.get<{ _id: string; name: string; password: string, email: string; points: number }>(
       'http://localhost:3000/api/user/' + id
     );
   }
 
-  updateUser(id: string, name: string, email: string, points: number) {
+  updateUser(id: string, name: string, password: string, email: string, points: number) {
     const user: AuthData = { id: id, name: name, email: email, points: points };
     this.http
       .patch('http://localhost:3000/api/user/' + id, user)
       .subscribe(response => {
-        const updatedUsers = [...this.users];
-        const oldPostIndex = updatedUsers.findIndex(p => p.id === user.id);
-        updatedUsers[oldPostIndex] = user;
-        this.users = updatedUsers;
-        this.usersUpdated.next([...this.users]);
       });
   }
 }

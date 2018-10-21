@@ -20,6 +20,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { UserProfileComponent } from './game/user-profile/user-profile.component';
 
 import { OrderModule } from 'ngx-order-pipe';
+import { UserService } from './services/user.service';
+import { PointsService } from './services/points.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { OrderModule } from 'ngx-order-pipe';
     AppRoutingModule,
     OrderModule
   ],
-  providers: [DictionaryService, UnicodeConverterService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  // tslint:disable-next-line:max-line-length
+  providers: [DictionaryService, UnicodeConverterService, UserService, PointsService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
