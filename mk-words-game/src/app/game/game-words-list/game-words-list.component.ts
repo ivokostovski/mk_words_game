@@ -3,8 +3,6 @@ import {
   OnInit,
   Input,
   OnChanges,
-  SimpleChange,
-  SimpleChanges,
   Output,
   EventEmitter
 } from '@angular/core';
@@ -12,7 +10,6 @@ import {
 import { Word } from '../../models/word.model';
 import { DictionaryService } from '../../services/dictionary.service';
 import { UnicodeConverterService } from '../../services/unicodeConverter.service';
-import { UserService } from '../../services/user.service';
 import { PointsService } from '../../services/points.service';
 
 @Component({
@@ -49,11 +46,10 @@ export class GameWordsListComponent implements OnInit, OnChanges {
       this.sendDictionary.emit(this.myDictionary);
     });
     this.currentGameTotalPoints = 0;
-    this.pointsService.getUserTotalPoints().then(points => {
+    this.pointsService.getUserTotalPoints();
+    this.pointsService.getPointsListener().subscribe(points => {
       this.totalUserPoints = points;
       console.log(points);
-    }).catch(error => {
-      return;
     });
   }
 

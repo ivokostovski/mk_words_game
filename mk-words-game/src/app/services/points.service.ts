@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class PointsService {
@@ -11,6 +12,7 @@ export class PointsService {
     currentGamePoints = 0;
     latestGamePoints = 0;
     totalUserPoints: number;
+    private pointsListener = new Subject<number>();
 
     addPointsForCurrentGame(currentWordPoints) {
         this.currentGamePoints += currentWordPoints;
@@ -21,15 +23,16 @@ export class PointsService {
         return this.latestGamePoints;
     }
 
-    async getUserTotalPoints() {
+    getPointsListener() {
+        return this.pointsListener.asObservable();
+    }
+
+    getUserTotalPoints() {
         const currentUserId = this.authService.getUserId();
         const currentUser = this.userService.getUser(currentUserId);
-        await currentUser.subscribe(user => {
-            this.totalUserPoints = user.points;
-            console.log(user.points);
+        currentUser.subscribe(user => {
+            this.pointsListener.next(user.points);
         });
-        console.log(this.totalUserPoints);
-        return this.totalUserPoints;
     }
 
     restCurrentGamePoints() {
@@ -41,7 +44,8 @@ export class PointsService {
         const currentUserId = this.authService.getUserId();
         const currentUser = this.userService.getUser(currentUserId);
         currentUser.subscribe(user => {
-            this.userService.updateUser(user._id, user.name, user.password, user.email, this.currentGamePoints);
+            const totalPoints = user.points + this.currentGamePoints;
+            this.userService.updateUser(user._id, user.name, user.password, user.email, totalPoints);
             this.restCurrentGamePoints();
         });
     }

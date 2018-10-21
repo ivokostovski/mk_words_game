@@ -33,8 +33,9 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  private saveAuthData(token: string, expirationDate: Date) {
+  private saveAuthData(token: string, expirationDate: Date, userId: string) {
     localStorage.setItem('token', token);
+    localStorage.setItem('userid', userId);
     localStorage.setItem('expiration', expirationDate.toISOString());
   }
 
@@ -64,7 +65,7 @@ export class AuthService {
         this.authStatusListener.next(true);
         const now = new Date();
         const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-        this.saveAuthData(token, expirationDate);
+        this.saveAuthData(token, expirationDate, this.loggedInUserId);
         this.router.navigate(['/']);
       }
     });
@@ -93,6 +94,7 @@ export class AuthService {
 
   private getAuthData() {
     const token = localStorage.getItem('token');
+    this.loggedInUserId = localStorage.getItem('userid');
     const expirationDate = localStorage.getItem('expiration');
     if (!token && !expirationDate) {
       return;
