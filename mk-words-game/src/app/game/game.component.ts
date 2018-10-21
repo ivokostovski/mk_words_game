@@ -42,17 +42,12 @@ export class GameComponent implements OnInit, OnDestroy {
     this.gameStarted = true;
   }
 
-  newGameStarting() {
-    this.newGame = false;
-  }
-
   gameGottenLetters(event: Object) {
     this.validLetters = event;
   }
 
   gameEnded(event: Event) {
     this.gameStarted = false;
-    this.newGame = true;
   }
 
   ngOnDestroy() {

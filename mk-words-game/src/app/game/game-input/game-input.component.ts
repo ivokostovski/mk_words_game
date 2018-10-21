@@ -17,7 +17,7 @@ export class GameInputComponent implements OnInit {
   submitedWord: Word;
   rForm: FormGroup;
   isValid: boolean;
-  timer = 60;
+  timer = 4;
 
   constructor(private fb: FormBuilder) {
     this.rForm = fb.group({
@@ -25,22 +25,26 @@ export class GameInputComponent implements OnInit {
     });
    }
 
-   ngOnInit() {
-     setTimeout(() => {
-      const myTimer = interval(1000);
-      myTimer.subscribe(() => {
-      if (this.timer > 0) {
-        this.timer--;
-      } else if (this.timer <= 0) {
-        this.gameEndedNotify.emit(this.gameEnded);
-      }
-    });
-     }, 500);
-   }
+  ngOnInit() {
+    this.counter();
+  }
 
-   addWord(content) {
-    this.submitedWord = new Word((content.content).trim().toLowerCase(), this.isValid, 0);
-    this.submitedWordNotify.emit(this.submitedWord);
-    this.rForm.reset();
-   }
+  addWord(content) {
+  this.submitedWord = new Word((content.content).trim().toLowerCase(), this.isValid, 0);
+  this.submitedWordNotify.emit(this.submitedWord);
+  this.rForm.reset();
+  }
+
+  private counter() {
+  setTimeout(() => {
+    const myTimer = interval(1000);
+    myTimer.subscribe(() => {
+    if (this.timer > 0) {
+      this.timer--;
+    } else if (this.timer <= 0) {
+      this.gameEndedNotify.emit(this.gameEnded);
+    }
+  });
+    }, 500);
+  }
 }

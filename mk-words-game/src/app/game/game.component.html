@@ -3,5 +3,24 @@
   <app-game-gotten-letters (sendGottenLetters)="gameGottenLetters($event)" [myDictionary]="dictionary"></app-game-gotten-letters>
   <app-game-words-list (sendDictionary)="transferDictionary($event)" [submitedWord]="submitedWord" [validLetters]="validLetters"></app-game-words-list>
 </div>
-<div class="bg-success btn-lg text-white text-center" *ngIf="!gameStarted && userIsAuthenticated" (click)="gameStarting()" [routerLink]="['/user/game']">Започни со нова игра</div>
+
+<div>
+  Добредојде во „Играта на зборови“
+
+  Правила:
+</div>
+
+<div>
+ти си логиран, кликни да почнеш да играш
+</div>
+
+<div>
+ти не си логиран, кликни да се логираш или ако немаш акаунт регистрирај се
+</div>
+
+<div>
+  Честитки, освои ХХ поени во оваа игра. Ако сакаш да продолжиш кликни, или види ја ранг листата или чао
+</div>
+
+<div class="bg-success btn-lg text-white text-center" *ngIf="!gameStarted && userIsAuthenticated" (click)="gameStarting()">Започни со нова игра</div>
 

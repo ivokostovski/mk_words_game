@@ -7,7 +7,7 @@ import { HighscoresComponent } from './highscores/highscores.component';
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  { path: 'game', component: GameComponent, canActivate: [AuthGuard] },
+  { path: '', component: GameComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'highscores', component: HighscoresComponent, canActivate: [AuthGuard]}

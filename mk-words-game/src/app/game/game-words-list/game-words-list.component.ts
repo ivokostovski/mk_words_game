@@ -1,8 +1,18 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChange,
+  SimpleChanges,
+  Output,
+  EventEmitter
+} from '@angular/core';
 
 import { Word } from '../../models/word.model';
 import { DictionaryService } from '../../services/dictionary.service';
 import { UnicodeConverterService } from '../../services/unicodeConverter.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-game-words-list',
@@ -10,10 +20,12 @@ import { UnicodeConverterService } from '../../services/unicodeConverter.service
   styleUrls: ['./game-words-list.component.css']
 })
 export class GameWordsListComponent implements OnInit, OnChanges {
-
-  @Input() submitedWord: Word;
-  @Input() validLetters;
-  @Output() sendDictionary: EventEmitter<any> = new EventEmitter<any>();
+  @Input()
+  submitedWord: Word;
+  @Input()
+  validLetters;
+  @Output()
+  sendDictionary: EventEmitter<any> = new EventEmitter<any>();
 
   myDictionary;
   convertedWord;
@@ -23,8 +35,11 @@ export class GameWordsListComponent implements OnInit, OnChanges {
   wordExist = false;
   currentGameTotalPoints: number;
 
-  constructor(private dicService: DictionaryService, private converter: UnicodeConverterService) {
-  }
+  constructor(
+    private dicService: DictionaryService,
+    private converter: UnicodeConverterService,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.dicService.getData().subscribe(data => {
@@ -100,7 +115,6 @@ export class GameWordsListComponent implements OnInit, OnChanges {
   calculatePointsForEachWord(word: string) {
     return word.split('').length;
   }
-
 }
 
 //
