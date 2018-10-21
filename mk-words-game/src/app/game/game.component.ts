@@ -13,15 +13,16 @@ import { PointsService } from '../services/points.service';
 
 export class GameComponent implements OnInit, OnDestroy {
 
-  public submitedWord: Word;
-  public gameStarted = false;
-  public validLetters;
-  public dictionary;
-  public userIsAuthenticated = false;
-  private authStatusSub: Subscription;
+  submitedWord: Word;
+  gameStarted = false;
+  gameWelcome = true;
+  validLetters;
+  dictionary;
+  userIsAuthenticated = false;
   latestGamePoints: number;
+  private authStatusSub: Subscription;
 
-  constructor(private userService: UserService, private authService: AuthService, private pointsService: PointsService) {
+  constructor(private authService: AuthService, private pointsService: PointsService) {
   }
 
   ngOnInit() {
@@ -41,6 +42,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   gameStarting() {
     this.gameStarted = true;
+    this.gameWelcome = false;
   }
 
   gameGottenLetters(event: Object) {

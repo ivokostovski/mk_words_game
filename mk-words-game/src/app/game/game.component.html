@@ -4,23 +4,43 @@
   <app-game-words-list (sendDictionary)="transferDictionary($event)" [submitedWord]="submitedWord" [validLetters]="validLetters"></app-game-words-list>
 </div>
 
-<div>
-  Добредојде во „Играта на зборови“
-
-  Правила:
+<!-- Welcome and rules list for authenticated users -->
+<div class="jumbotron" *ngIf="gameWelcome && userIsAuthenticated">
+  <h1 class="display-4">Добредојде во играта на зборови!</h1>
+  <p class="lead">Пред да почнеш да играш, прочитај ги правилата на игра.</p>
+  <hr class="my-4">
+  <ol>
+    <li>Секој играч добива листа на 12 букви. Користи ги буквите да напишеш збор од 2 до 12 букви.</li>
+    <li>Користи кирилица, латичничните зборови ќе бидат впишани како неточни.</li>
+    <li>Зборот мора да е впишан во официјалниот македонски речник.</li>
+    <li>Не смее да се внесе еден збор 2 пати.</li>
+    <li>За секој правилно внесен збор играчот добива онолку поени како што има букви зборот.</li>
+    <li>Поените се собираат и на крајот на играта се впишуваат во профилот на играчот.</li>
+  </ol>
+  <div class="text-center mt-3">
+    <a class="bg-success btn-lg text-white text-center" *ngIf="!gameStarted" (click)="gameStarting()">Започни со нова игра</a>
+  </div>
 </div>
 
-<div>
-ти си логиран, кликни да почнеш да играш
+<!-- Game finished for authenticated users -->
+<div class="jumbotron" *ngIf="!gameStarted && userIsAuthenticated && !gameWelcome">
+  <h1 class="display-4">Играта заврши!</h1>
+  <p class="lead">Честитки, освои {{ latestGamePoints }} поени</p>
+  <hr class="my-4">
+  <p>Провери ја твојата позиција на ранг листата, или започни нова игра</p>
+  <div class="text-center mt-3">
+    <a class="bg-info btn-lg text-white text-center" routerLink="/highscores">Види ја ранг листата</a>
+    <a class="bg-success btn-lg text-white text-center ml-3" (click)="gameStarting()">Започни со нова игра</a>
+  </div>
 </div>
 
-<div>
-ти не си логиран, кликни да се логираш или ако немаш акаунт регистрирај се
-</div>
-
-<div>
-  Честитки, освои {{ latestGamePoints }} поени во оваа игра. Ако сакаш да продолжиш кликни, или види ја ранг листата или чао
-</div>
-
-<div class="bg-success btn-lg text-white text-center" *ngIf="!gameStarted && userIsAuthenticated" (click)="gameStarting()">Започни со нова игра</div>
-
+<!-- User not authenticated -->
+<div class="jumbotron" *ngIf="!userIsAuthenticated">
+    <h1 class="display-4">Добредојде во играта на зборови!</h1>
+    <p class="lead">За да ја играш играта мора да имаш профил. Доколку немаш профил, регистрирај се на линкот подолу.</p>
+    <hr class="my-4">
+    <div class="text-center mt-3">
+      <a class="bg-success btn-lg text-white text-center" routerLink="/login">Логирај се</a>
+      <a class="bg-primary btn-lg text-white text-center ml-3" routerLink="/signup">Регистрирај се</a>
+    </div>
+  </div>

@@ -1,7 +1,14 @@
 <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        Поени во моментална игра: {{ currentGameTotalPoints }} || Вкупно поени: {{ totalUserPoints }}
+        <div class="d-flex justify-content-center my-3">
+          <button type="button" class="btn btn-primary">
+            Поени <span class="badge badge-light">{{ currentGameTotalPoints }}</span>
+          </button>
+          <button type="button" class="btn btn-info ml-3">
+            Вкупно поени <span class="badge badge-light">{{ totalUserPoints }}</span>
+          </button>
+        </div>
       </div>
     </div>
 </div>

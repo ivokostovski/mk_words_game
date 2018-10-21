@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
+  isLoading = false;
   loginForm: FormGroup;
+  private authStatusSub: Subscription;
 
   constructor(private fb: FormBuilder, public authService: AuthService) {
     this.loginForm = fb.group({
@@ -18,14 +21,24 @@ export class LoginComponent implements OnInit {
     });
    }
 
-  ngOnInit() {
+   ngOnInit() {
+    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
+      authStatus => {
+        this.isLoading = false;
+      }
+    );
   }
 
   login(form) {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     this.authService.loginUser(form.email, form.password);
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
   }
 
 }

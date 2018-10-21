@@ -1,7 +1,8 @@
 <div class="container">
     <div class="row px-5">
       <div class="col-12">
-        <form [formGroup]="signupForm" (ngSubmit)="signup(signupForm.value)">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <form [formGroup]="signupForm" (ngSubmit)="signup(signupForm.value)" *ngIf="!isLoading">
           <div class="form-group text-center">
 
             <input type="text" class="form-control mt-2" placeholder="Име" formControlName="name" required>
