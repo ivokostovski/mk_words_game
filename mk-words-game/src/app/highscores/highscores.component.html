@@ -1,18 +1,12 @@
-<table class="table">
+<div class="mat-app-background basic-container"></div>
+<table matSort (matSortChange)="sortData($event)" class="table" matSortStart="desc">
   <thead class="thead-light">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th class="click-cursor" scope="col" [class.active]="order === 'points'"
-      (click)="setOrder('points')">Points <span [hidden]="reverse">▼</span
-        ><span [hidden]="!reverse">▲</span></th>
-    </tr>
+    <th mat-sort-header="name" scope="col">Name</th>
+    <th mat-sort-header="points" scope="col" mat-sort>Points</th>
   </thead>
-  <tbody>
-    <tr *ngFor="let user of users | orderBy: order:reverse">
-      <th scope="row"></th>
-      <td>{{ user.name }}</td>
-      <td>{{ user.points }}</td>
-    </tr>
-  </tbody>
+
+  <tr *ngFor="let user of users">
+    <td>{{user.name}}</td>
+    <td>{{user.points}}</td>
+  </tr>
 </table>

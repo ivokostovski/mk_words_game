@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import {MatNativeDateModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import { GameComponent } from './game/game.component';
 import { HeaderComponent } from './header/header.component';
@@ -46,8 +49,11 @@ import { ErrorService } from './services/error.service';
     HttpClientModule,
     AppRoutingModule,
     OrderModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule
   ],
+  entryComponents: [HighscoresComponent],
   // tslint:disable-next-line:max-line-length
   providers: [DictionaryService, UnicodeConverterService, UserService, PointsService, ErrorService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { AuthData } from '../models/auth-data.model';
 import { OrderPipe } from 'ngx-order-pipe';
+import { Sort } from '@angular/material';
 
 @Component({
   selector: 'app-highscores',
@@ -11,25 +12,35 @@ import { OrderPipe } from 'ngx-order-pipe';
 export class HighscoresComponent implements OnInit {
 
   users: AuthData[] = [];
-  order = 'user.points';
-  reverse = false;
 
-  constructor(private userService: UserService, private orderPipe: OrderPipe) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
     this.userService.getUsers();
     this.userService.getUserUpdateListener().subscribe(users => {
       this.users = users;
-      this.users = this.orderPipe.transform(this.users, 'user.points');
     });
   }
 
-  setOrder(value: string) {
-    if (this.order === value) {
-      this.reverse = !this.reverse;
+  sortData(sort: Sort) {
+    const data = this.users.slice();
+    if (!sort.active || sort.direction === '') {
+      this.users = data;
+      return;
     }
 
-    this.order = value;
+    this.users = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'name': return compare(a.name, b.name, isAsc);
+        case 'points': return compare(a.points, b.points, isAsc);
+        default: return 0;
+      }
+    });
   }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
