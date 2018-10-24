@@ -10,9 +10,9 @@
               Внеси име!
             </div>
 
-            <input type="email" class="form-control mt-2" placeholder="Е-пошта" formControlName="email" required>
+            <input type="email" class="form-control mt-2" placeholder="Е-маил" formControlName="email" required>
             <div class="alert alert-danger mt-1" role="alert" *ngIf="!signupForm.controls['email'].valid && signupForm.controls['email'].touched">
-              Внеси корисничко име!
+              Внеси е-маил!
             </div>
 
             <input type="password" class="form-control mt-2" placeholder="Лозинка" formControlName="password" required>

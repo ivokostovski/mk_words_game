@@ -5,9 +5,9 @@
       <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" *ngIf="!isLoading">
         <div class="form-group text-center">
 
-          <input type="email" class="form-control mt-2" placeholder="Корисничко име" formControlName="email" required>
+          <input type="email" class="form-control mt-2" placeholder="Е-маил" formControlName="email" required>
           <div class="alert alert-danger mt-1" role="alert" *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].touched">
-            Внеси корисничко име!
+            Внеси е-маил!
           </div>
 
           <input type="password" class="form-control mt-2" placeholder="Лозинка" formControlName="password" required>
