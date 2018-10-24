@@ -3,6 +3,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import { NgModule } from '@angular/core';
 import {
   MatInputModule,
+  MatProgressBarModule,
   MatCardModule,
   MatButtonModule,
   MatToolbarModule,
@@ -23,7 +24,6 @@ import {
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
-  MatProgressBarModule,
   MatRadioModule,
   MatRippleModule,
   MatSelectModule,

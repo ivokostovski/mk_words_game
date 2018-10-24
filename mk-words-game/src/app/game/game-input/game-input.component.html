@@ -2,6 +2,7 @@
   <div class="col-12">
     <div class="text-center font-weight-bold mb-2" *ngIf="timer">
       Време: {{ timer }} секунди
+      <mat-progress-bar mode="determinate" [value]="timer"></mat-progress-bar>
     </div>
     <div class="text-center font-weight-bold mb-2" *ngIf="!timer">
       Играта заврши!

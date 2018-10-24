@@ -28,6 +28,7 @@ import { PointsService } from './services/points.service';
 import { AngularMaterialModule } from './angular-material.module';
 import { ErrorComponent } from './error/error.component';
 import { ErrorService } from './services/error.service';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ErrorService } from './services/error.service';
     GameWordsListComponent,
     LoginComponent,
     SignupComponent,
-    ErrorComponent
+    ErrorComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
