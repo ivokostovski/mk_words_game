@@ -1,10 +1,8 @@
 <div class="p-3 mb-2 shadow" *ngIf="lettersReady">
   <mat-chip-list>
     <div class="m-auto">
-      <mat-chip *ngFor="let letter of choosenRandomWord" class="text-uppercase font-weight-bold">{{letter}}</mat-chip>
+      <mat-chip *ngFor="let letter of choosenRandomWord" class="text-uppercase font-weight-bold" (click)="addLetter($event)">{{letter}}</mat-chip>
     </div>
   </mat-chip-list>
-  <!-- <span class="mx-2 text-uppercase font-weight-bold"
-  *ngFor="let letter of choosenRandomWord">{{letter}}</span> -->
 </div>
 <mat-spinner *ngIf="!lettersReady"></mat-spinner>

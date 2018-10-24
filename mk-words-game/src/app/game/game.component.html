@@ -1,6 +1,6 @@
 <div *ngIf="gameStarted">
-  <app-game-input (submitedWordNotify)="gameSubmitedWordNotify($event)" (gameEndedNotify)="gameEnded($event)"></app-game-input>
-  <app-game-gotten-letters (sendGottenLetters)="gameGottenLetters($event)" [myDictionary]="dictionary"></app-game-gotten-letters>
+  <app-game-input (submitedWordNotify)="gameSubmitedWordNotify($event)" (gameEndedNotify)="gameEnded($event)" [clickedLetter]="clickedLetter"></app-game-input>
+  <app-game-gotten-letters (sendGottenLetters)="gameGottenLetters($event)" (sendClickedLetter)="gameClickedLetter($event)" [myDictionary]="dictionary"></app-game-gotten-letters>
   <app-game-words-list (sendDictionary)="transferDictionary($event)" [submitedWord]="submitedWord" [validLetters]="validLetters"></app-game-words-list>
 </div>
 

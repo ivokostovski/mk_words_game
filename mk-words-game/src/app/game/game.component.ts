@@ -17,6 +17,7 @@ export class GameComponent implements OnInit, OnDestroy {
   gameStarted = false;
   gameWelcome = true;
   validLetters;
+  clickedLetter;
   dictionary;
   userIsAuthenticated = false;
   latestGamePoints: number;
@@ -47,6 +48,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
   gameGottenLetters(event: Object) {
     this.validLetters = event;
+  }
+  
+  gameClickedLetter(letter: any) {
+    this.clickedLetter = letter;
   }
 
   gameEnded(event: Event) {

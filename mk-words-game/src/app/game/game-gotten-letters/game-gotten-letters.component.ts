@@ -8,6 +8,7 @@ import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChange
 export class GameGottenLettersComponent implements OnInit, OnChanges  {
 
   @Output() sendGottenLetters: EventEmitter<any> = new EventEmitter<any>();
+  @Output() sendClickedLetter: EventEmitter<any> = new EventEmitter<any>();
   @Input() myDictionary;
 
   maxNumberOfLetters = 12;
@@ -57,7 +58,11 @@ export class GameGottenLettersComponent implements OnInit, OnChanges  {
         this.chooseRandomWord();
         this.lettersReady = true;
     }
-}
+  }
+
+  addLetter(event: any) {
+    this.sendClickedLetter.emit(event.path[0].innerText);
+  }
 
   chooseRandomWord() {
     this.choosenRandomWord = [];

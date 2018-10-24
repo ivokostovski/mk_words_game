@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit} from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Word } from '../../models/word.model';
 import { interval } from 'rxjs';
@@ -13,6 +13,8 @@ export class GameInputComponent implements OnInit {
 
   @Output() submitedWordNotify: EventEmitter<any> = new EventEmitter<any>();
   @Output() gameEndedNotify: EventEmitter<any> = new EventEmitter<any>();
+  @Input() clickedLetter;
+  clickedLetters: string;
   gameEnded = true;
   submitedWord: Word;
   rForm: FormGroup;
@@ -27,6 +29,15 @@ export class GameInputComponent implements OnInit {
 
   ngOnInit() {
     this.counter();
+    this.clickedLetters = '';
+  }
+
+  ngOnChanges(changes: any) {
+    this.addClickedLetter();
+  }
+
+  addClickedLetter() {
+    this.clickedLetters += this.clickedLetter;
   }
 
   addWord(content) {
