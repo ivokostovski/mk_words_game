@@ -16,7 +16,6 @@ export class PointsService {
 
     addPointsForCurrentGame(currentWordPoints) {
         this.currentGamePoints += currentWordPoints;
-        console.log(this.currentGamePoints);
     }
 
     getLatestGamePoints() {

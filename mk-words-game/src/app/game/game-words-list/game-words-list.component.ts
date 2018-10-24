@@ -49,7 +49,6 @@ export class GameWordsListComponent implements OnInit, OnChanges {
     this.pointsService.getUserTotalPoints();
     this.pointsService.getPointsListener().subscribe(points => {
       this.totalUserPoints = points;
-      console.log(points);
     });
   }
 
