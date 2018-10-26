@@ -28,6 +28,7 @@ import { PointsService } from './services/points.service';
 import { AngularMaterialModule } from './angular-material.module';
 import { ErrorComponent } from './error/error.component';
 import { ErrorService } from './services/error.service';
+import { ErrorInterceptor } from './error-interceptor';
 
 @NgModule({
   declarations: [
@@ -53,9 +54,9 @@ import { ErrorService } from './services/error.service';
     BrowserAnimationsModule,
     MatNativeDateModule
   ],
-  entryComponents: [HighscoresComponent],
+  entryComponents: [HighscoresComponent, ErrorComponent],
   // tslint:disable-next-line:max-line-length
-  providers: [DictionaryService, UnicodeConverterService, UserService, PointsService, ErrorService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [DictionaryService, UnicodeConverterService, UserService, PointsService, ErrorService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
