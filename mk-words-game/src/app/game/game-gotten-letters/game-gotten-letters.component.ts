@@ -2,8 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChange
 
 @Component({
   selector: 'app-game-gotten-letters',
-  templateUrl: './game-gotten-letters.component.html',
-  styleUrls: ['./game-gotten-letters.component.css']
+  templateUrl: './game-gotten-letters.component.html'
 })
 export class GameGottenLettersComponent implements OnInit, OnChanges  {
 

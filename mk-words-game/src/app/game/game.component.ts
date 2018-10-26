@@ -1,14 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Word } from '../models/word.model';
-import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
 import { PointsService } from '../services/points.service';
 
 @Component({
   selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  templateUrl: './game.component.html'
 })
 
 export class GameComponent implements OnInit, OnDestroy {
@@ -49,7 +47,7 @@ export class GameComponent implements OnInit, OnDestroy {
   gameGottenLetters(event: Object) {
     this.validLetters = event;
   }
-  
+
   gameClickedLetter(letter: any) {
     this.clickedLetter = letter;
   }

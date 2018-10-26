@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { AuthData } from '../models/auth-data.model';
-import { OrderPipe } from 'ngx-order-pipe';
 import { Sort } from '@angular/material';
 
 @Component({
   selector: 'app-highscores',
-  templateUrl: './highscores.component.html',
-  styleUrls: ['./highscores.component.css']
+  templateUrl: './highscores.component.html'
 })
 export class HighscoresComponent implements OnInit {
 

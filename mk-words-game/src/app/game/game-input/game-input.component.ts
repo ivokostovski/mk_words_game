@@ -1,15 +1,14 @@
-import { Component, EventEmitter, Output, OnInit, Input} from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, Input, OnChanges} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Word } from '../../models/word.model';
 import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-game-input',
-  templateUrl: './game-input.component.html',
-  styleUrls: ['./game-input.component.css']
+  templateUrl: './game-input.component.html'
 })
 
-export class GameInputComponent implements OnInit {
+export class GameInputComponent implements OnInit, OnChanges {
 
   @Output() submitedWordNotify: EventEmitter<any> = new EventEmitter<any>();
   @Output() gameEndedNotify: EventEmitter<any> = new EventEmitter<any>();

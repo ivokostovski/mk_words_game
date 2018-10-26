@@ -14,8 +14,7 @@ import { PointsService } from '../../services/points.service';
 
 @Component({
   selector: 'app-game-words-list',
-  templateUrl: './game-words-list.component.html',
-  styleUrls: ['./game-words-list.component.css']
+  templateUrl: './game-words-list.component.html'
 })
 export class GameWordsListComponent implements OnInit, OnChanges {
   @Input()
