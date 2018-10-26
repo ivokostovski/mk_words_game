@@ -18,7 +18,7 @@
     <li>Поените се собираат и на крајот на играта се впишуваат во профилот на играчот.</li>
   </ol>
   <div class="text-center mt-3">
-    <a class="bg-success btn-lg text-white text-center" *ngIf="!gameStarted" (click)="gameStarting()">Започни со нова игра</a>
+    <a class="bg-success btn-lg text-white text-center pointer" *ngIf="!gameStarted" (click)="gameStarting()">Започни со нова игра</a>
   </div>
 </div>
 
@@ -30,7 +30,7 @@
   <p>Провери ја твојата позиција на ранг листата, или започни нова игра</p>
   <div class="text-center mt-3">
     <a class="bg-info btn-lg text-white text-center" routerLink="/highscores">Види ја ранг листата</a>
-    <a class="bg-success btn-lg text-white text-center ml-3" (click)="gameStarting()">Започни со нова игра</a>
+    <a class="bg-success btn-lg text-white text-center ml-3 pointer" (click)="gameStarting()">Започни со нова игра</a>
   </div>
 </div>
 
@@ -40,7 +40,7 @@
     <p class="lead">За да ја играш играта мора да имаш профил. Доколку немаш профил, регистрирај се на линкот подолу.</p>
     <hr class="my-4">
     <div class="text-center mt-3">
-      <a class="bg-success btn-lg text-white text-center" routerLink="/login">Логирај се</a>
-      <a class="bg-primary btn-lg text-white text-center ml-3" routerLink="/signup">Регистрирај се</a>
+      <a class="bg-success btn-lg text-white text-center pointer" routerLink="/login">Логирај се</a>
+      <a class="bg-primary btn-lg text-white text-center ml-3 pointer" routerLink="/signup">Регистрирај се</a>
     </div>
   </div>

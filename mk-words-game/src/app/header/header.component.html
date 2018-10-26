@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" routerLink="/">Игра на зборови</a>
+  <a class="navbar-brand pointer" routerLink="/">Игра на зборови</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,19 +8,19 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/">Дома <span class="sr-only">(current)</span></a>
+        <a class="nav-link pointer" routerLink="/">Дома <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="userIsAuthenticated" routerLink="/highscores">Ранг листа</a>
+        <a class="nav-link pointer" *ngIf="userIsAuthenticated" routerLink="/highscores">Ранг листа</a>
       </li>
       <li class="nav-item" *ngIf="!userIsAuthenticated">
-        <a class="nav-link" routerLink="/signup">Регистрирај се</a>
+        <a class="nav-link pointer" routerLink="/signup">Регистрирај се</a>
       </li>
       <li class="nav-item" *ngIf="!userIsAuthenticated">
-        <a class="nav-link" routerLink="/login">Логирај се</a>
+        <a class="nav-link pointer" routerLink="/login">Логирај се</a>
       </li>
       <li class="nav-item" *ngIf="userIsAuthenticated">
-        <a class="nav-link" (click)="onLogout()">Одлогирај се</a>
+        <a class="nav-link pointer" (click)="onLogout()">Одлогирај се</a>
       </li>
     </ul>
   </div>
