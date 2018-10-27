@@ -109,8 +109,6 @@ export class GameWordsListComponent implements OnInit, OnChanges {
     for (let i = 0; i < wordArray.length; i++) {
       if (wordArray[i].content.toUpperCase() === word.content.toUpperCase()) {
         return true;
-      } else {
-        return false;
       }
     }
   }
@@ -119,5 +117,3 @@ export class GameWordsListComponent implements OnInit, OnChanges {
     return word.split('').length;
   }
 }
-
-//
